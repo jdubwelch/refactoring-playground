@@ -1,5 +1,10 @@
 <?php
 
+namespace App\RefactorBigMethod;
+
+use defaults;
+use environment;
+
 include 'vendor/autoload.php';
 
 // In some environment setting class
@@ -13,15 +18,18 @@ defaults::$clientInfo = [
 $environment = new environment();
 
 // pretend this is some script.
-echo $environment->someReallyLongMethod('one', 'bar', false);
+$originalReallyLongMethod = new OriginalReallyLongMethod();
+echo $originalReallyLongMethod->someReallyLongMethod('one', 'bar', false);
 
 echo "\n    >> going to other places in the app\n";
 
 // this is another script calling it.
-echo $environment->someReallyLongMethod('foo', 'bar');
+$originalReallyLongMethod = new OriginalReallyLongMethod();
+echo $originalReallyLongMethod->someReallyLongMethod('foo', 'bar');
 
 echo "\n    >> going to other places in the app\n";
 
 // this is yet another script calling this method.
-echo $environment->someReallyLongMethod('foo', 'bar', false);
+$originalReallyLongMethod = new OriginalReallyLongMethod();
+echo $originalReallyLongMethod->someReallyLongMethod('foo', 'bar', false);
 echo "\n    >> done.";

@@ -30,6 +30,22 @@ echo $originalReallyLongMethod->someReallyLongMethod('foo', 'bar');
 echo "\n    >> going to other places in the app\n";
 
 // this is yet another script calling this method.
-$originalReallyLongMethod = new OriginalReallyLongMethod();
-echo $originalReallyLongMethod->someReallyLongMethod('foo', 'bar', false);
+$someCheckToUseNewRequirement = false;
+if ($someCheckToUseNewRequirement) {
+    $reallyLongMethod = new BetterDesign(defaults::$clientInfo['id']);
+} else {
+    $reallyLongMethod = new OriginalReallyLongMethod();
+}
+echo $reallyLongMethod->someReallyLongMethod('foo', 'bar', false);
+
+echo "\n    >> some accounts will get the above feature, others the below\n";
+
+// this is yet another script calling this method.
+$someCheckToUseNewRequirement = true;
+if ($someCheckToUseNewRequirement) {
+    $reallyLongMethod = new BetterDesign(defaults::$clientInfo['id']);
+} else {
+    $reallyLongMethod = new OriginalReallyLongMethod();
+}
+echo $reallyLongMethod->someReallyLongMethod('foo', 'bar', false);
 echo "\n    >> done.";
